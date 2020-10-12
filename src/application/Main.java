@@ -96,7 +96,7 @@ public class Main extends Application {
 		pStage.setScene(sc);
 		pStage.setMaxWidth(sc.getWidth());
 		pStage.setMaxHeight(sc.getHeight());
-		pStage.setTitle("Taschenrechner");
+		pStage.setTitle("Calculator");
 		pStage.show();
 		
 		
