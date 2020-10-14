@@ -1,6 +1,7 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
@@ -17,6 +18,9 @@ import javafx.scene.text.TextAlignment;
 
 
 public class Main extends Application {
+
+	TextField tf = new TextField();
+	
 	@Override
 	public void start(Stage pStage) {
 		
@@ -26,11 +30,10 @@ public class Main extends Application {
 		ergebnis.setTextAlignment(TextAlignment.RIGHT);
 
 		
-		TextField tf = new TextField();
 		tf.setPrefSize(270, 15);
 		tf.setAlignment(Pos.CENTER_RIGHT);
 		
-		// Buttons
+		// ____________________Buttons________________________
 		// Numbers
 		Button n1 = new Button("1");
 		n1.setPrefSize(50, 50);
@@ -66,7 +69,7 @@ public class Main extends Application {
 		gleich.setPrefSize(50, 105);
 		
 		// Andere
-		Button komma = new Button(".");
+		Button komma = new Button(",");
 		komma.setPrefSize(50, 50);
 		Button clear = new Button("C");
 		clear.setPrefSize(50, 50);
@@ -76,7 +79,7 @@ public class Main extends Application {
 		
 		
 		
-		// Layout
+		// __________________________Layout______________________________
 		GridPane root = new GridPane();
 		root.setPadding(new Insets(10));
 		root.setVgap(5);
@@ -115,8 +118,66 @@ public class Main extends Application {
 		root.add(gleich, 12, 8, 3, 6);
 		
 		
+		// ___________________Funktionalität__________________________
+		// Buttons 
+		// Wenn auf einer der Buttons gedruckt wird dann erscheint dieser
+		// Zahl in der Textfield
 		
-		// Show
+		n1.setOnAction((ActionEvent e)-> {
+			setNum("1");
+		});
+		n2.setOnAction((ActionEvent e)-> {
+			setNum("2");
+		});
+		n3.setOnAction((ActionEvent e)-> {
+			setNum("3");
+		});
+		n4.setOnAction((ActionEvent e)-> {
+			setNum("4");
+		});
+		n5.setOnAction((ActionEvent e)-> {
+			setNum("5");
+		});
+		n6.setOnAction((ActionEvent e)-> {
+			setNum("6");
+		});
+		n7.setOnAction((ActionEvent e)-> {
+			setNum("7");
+		});
+		
+		n8.setOnAction((ActionEvent e)-> {
+			setNum("8");
+		});
+		n9.setOnAction((ActionEvent e)-> {
+			setNum("9");
+		});
+		n0.setOnAction((ActionEvent e)-> {
+			setNum("0");
+		});
+		
+		komma.setOnAction((ActionEvent e)-> {
+			setNum(",");
+		});
+		plus.setOnAction((ActionEvent e)-> {
+			setOperator(" + ");
+		});
+		minus.setOnAction((ActionEvent e)-> {
+			setOperator(" - ");
+		});
+		mal.setOnAction((ActionEvent e)-> {
+			setOperator(" x ");
+		});
+		durch.setOnAction((ActionEvent e)-> {
+			setOperator(" : ");
+		});
+		//Andere
+		clear.setOnAction((ActionEvent e)-> {
+			tf.clear();
+		});
+		
+		
+		
+		// ______________________Show_______________________________
 		Scene sc = new Scene(root, 300, 300);
 		pStage.setScene(sc);
 		pStage.setMaxWidth(sc.getWidth());
@@ -128,6 +189,32 @@ public class Main extends Application {
 		
 		
 		
+	}
+	
+	public void setNum(String num) {
+		if (tf.getText().equals("")) {
+			tf.setText(num);
+		}else {
+			tf.setText(tf.getText() + num);
+		}
+	}
+	
+	public void setOperator(String num) {
+		char[] array = tf.getText().toCharArray();
+	
+		if (array[array.length-1]== '+') {
+			return;
+		}else if (array[array.length-1]== '-') {
+			return;
+		}else if (array[array.length-1]== 'x') {
+			return;
+		}else if (array[array.length-1]== '/') {
+			return;
+		}else if (array[array.length-1]== ' ') {
+			return;
+		}else {
+			setNum(num);
+		}
 	}
 	
 	public static void main(String[] args) {
