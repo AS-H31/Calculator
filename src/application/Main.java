@@ -19,7 +19,7 @@ import javafx.scene.text.TextAlignment;
 
 public class Main extends Application {
 
-	TextField tf = new TextField();
+	TextField tf = new TextField(" ");
 	
 	@Override
 	public void start(Stage pStage) {
@@ -61,7 +61,7 @@ public class Main extends Application {
 		plus.setPrefSize(50, 50);
 		Button minus = new Button("-");
 		minus.setPrefSize(50, 50);
-		Button mal = new Button("x");
+		Button mal = new Button("*");
 		mal.setPrefSize(50, 50);
 		Button durch = new Button("/");
 		durch.setPrefSize(50, 50);
@@ -165,7 +165,7 @@ public class Main extends Application {
 			setOperator(" - ");
 		});
 		mal.setOnAction((ActionEvent e)-> {
-			setOperator(" x ");
+			setOperator(" * ");
 		});
 		durch.setOnAction((ActionEvent e)-> {
 			setOperator(" : ");
@@ -173,9 +173,20 @@ public class Main extends Application {
 		//Andere
 		clear.setOnAction((ActionEvent e)-> {
 			tf.clear();
+			tf.setText(" ");
+		});
+		back.setOnAction((ActionEvent e)->{
+			char[] array = tf.getText().trim().toCharArray();
+			char[] help = new char[array.length-1];
+			for (int i = 0; i < array.length-1; i++) {
+				help[i] = array[i];
+			}
+			tf.setText(String.valueOf(help).trim());
 		});
 		
-		
+		gleich.setOnAction((ActionEvent e)-> {
+			
+		});
 		
 		// ______________________Show_______________________________
 		Scene sc = new Scene(root, 300, 300);
