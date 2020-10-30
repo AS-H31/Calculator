@@ -20,6 +20,9 @@ import javafx.scene.text.TextAlignment;
 public class Main extends Application {
 
 	TextField tf = new TextField(" ");
+	boolean operatorKlicked = false;
+	int zahl1 = 0;
+	int zahl2 = 0;
 	
 	@Override
 	public void start(Stage pStage) {
@@ -158,33 +161,64 @@ public class Main extends Application {
 		komma.setOnAction((ActionEvent e)-> {
 			setNum(",");
 		});
+		
 		plus.setOnAction((ActionEvent e)-> {
 			setOperator(" + ");
 		});
+		
 		minus.setOnAction((ActionEvent e)-> {
 			setOperator(" - ");
 		});
+		
 		mal.setOnAction((ActionEvent e)-> {
 			setOperator(" * ");
 		});
+		
 		durch.setOnAction((ActionEvent e)-> {
 			setOperator(" : ");
 		});
+		
 		//Andere
+		
 		clear.setOnAction((ActionEvent e)-> {
 			tf.clear();
 			tf.setText(" ");
 		});
+		
 		back.setOnAction((ActionEvent e)->{
+			if (tf.getText().equals("")) {
+				return;
+			}
+			else {
 			char[] array = tf.getText().trim().toCharArray();
 			char[] help = new char[array.length-1];
 			for (int i = 0; i < array.length-1; i++) {
 				help[i] = array[i];
 			}
 			tf.setText(String.valueOf(help).trim());
+			}
 		});
 		
 		gleich.setOnAction((ActionEvent e)-> {
+			/*
+			 * get text
+			 * 
+			 * aus text Operator erkennen
+			 * 
+			 * erste zahl und Zweite Zahl aus text 
+			 * 
+			 * Umwandlung zu Integer 
+			 * 
+			 * Rechnoperatoin 
+			 * 
+			 * Ergebnis darstellen
+			 * 
+			 */
+			//char [] eingabe = tf.getText().trim().toCharArray();
+						
+			//tf.setText(rechnen(zahl1, 999, ""));
+			tf.clear();
+			
 			
 		});
 		
@@ -202,6 +236,27 @@ public class Main extends Application {
 		
 	}
 	
+	public String rechnen(int zahl1, int zahl2, String operator) {
+		
+		String erg = "";
+		switch (operator) {
+		case "+":
+			erg = String.valueOf(zahl1 + zahl2);
+			break;
+		case "-":
+			erg = String.valueOf(zahl1 - zahl2);
+			break;
+		case "*" : 
+			erg = String.valueOf(zahl1 * zahl2);
+			break;	
+		case ":" : 
+			erg = String.valueOf(zahl1 / zahl2);
+			break;
+		}
+		
+		return erg;
+	}
+
 	public void setNum(String num) {
 		if (tf.getText().equals("")) {
 			tf.setText(num);
@@ -211,7 +266,7 @@ public class Main extends Application {
 	}
 	
 	public void setOperator(String num) {
-		char[] array = tf.getText().toCharArray();
+		char[] array = tf.getText().trim().toCharArray();
 	
 		if (array[array.length-1]== '+') {
 			return;
@@ -223,8 +278,11 @@ public class Main extends Application {
 			return;
 		}else if (array[array.length-1]== ' ') {
 			return;
+		}else if (tf.getText().isEmpty()) {
+			return;
 		}else {
 			setNum(num);
+			
 		}
 	}
 	
